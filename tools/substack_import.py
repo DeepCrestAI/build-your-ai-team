@@ -9,9 +9,9 @@ Reads one of:
   --linkedin  Shares.csv from LinkedIn's "Get a copy of your data"
 
 and writes, inside --folder (default: the current folder):
-  substack/library/posts/YYYY-MM-DD_title_words.md   one file per post
-  substack/library/index.md                          every post, with likes, comments
-                                                     and restacks
+  substack/posts/YYYY-MM-DD_title_words.md   one file per post
+  substack/index.md                          every post, with likes, comments
+                                            and restacks
   (LinkedIn: linkedin/posts/ and linkedin/index.md)
 
 Run it again to add new posts and refresh the counts. A post file is never
@@ -410,10 +410,10 @@ def substack_posts(args):
 
 def import_substack(args):
     folder = Path(args.folder).expanduser()
-    library = folder / "substack" / "library"
-    posts_dir = library / "posts"
+    substack_dir = folder / "substack"
+    posts_dir = substack_dir / "posts"
     posts_dir.mkdir(parents=True, exist_ok=True)
-    index = library / "index.md"
+    index = substack_dir / "index.md"
     existing = read_index(index)
     rows = dict(existing)
     me = (args.me or "").strip().lower()
@@ -466,7 +466,7 @@ def import_substack(args):
             % date.today().isoformat())
     write_index(index, heading, rows, COLUMNS, note)
     print("Saved %d new posts; rewrote %d that were only partly saved before; "
-          "%d posts listed in substack/library/index.md." % (added, refreshed, len(rows)))
+          "%d posts listed in substack/index.md." % (added, refreshed, len(rows)))
     if guests:
         print("%d guest posts are labelled guest: true." % guests)
     if part:

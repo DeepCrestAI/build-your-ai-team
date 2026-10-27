@@ -20,7 +20,7 @@ python3 tools/substack_import.py --fetch https://yourname.substack.com --me "You
   ```
 
   It reads only the posts in the .zip, never your subscriber list. Don't unzip the export into your folder.
-- **What it writes:** `substack/library/posts/`, one file per post, and `substack/library/index.md`, every post with its likes, comments and restacks.
+- **What it writes:** `substack/posts/`, one file per post, and `substack/index.md`, every post with its likes, comments and restacks.
 - **Run it again** to add new posts and refresh the counts. A post saved in full is never overwritten.
-- **Not on Substack?** `--linkedin Shares.csv` reads the posts file from LinkedIn's "Get a copy of your data".
+- **Not on Substack?** `--linkedin Shares.csv` reads the posts file from LinkedIn's "Get a copy of your data", saving it under `linkedin/posts/` with `linkedin/index.md`.
 - It uses only Python's standard library and contacts nothing but your own Substack.
